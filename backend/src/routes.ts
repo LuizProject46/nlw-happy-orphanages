@@ -1,0 +1,19 @@
+import {Router} from "express"
+import {getRepository} from "typeorm"
+import Orphanage from "./model/Orphanage"
+
+import uploadConfig from './config/upload'
+import multer from 'multer'
+import OrphanagesController from "./controllers/OrphanagesController"
+
+const routes = Router()
+const upload = multer(uploadConfig)
+
+
+routes.post('/orphanages',upload.array('images'),OrphanagesController.create)
+routes.get('/orphanages',OrphanagesController.index)
+routes.get('/orphanages/:id',OrphanagesController.show)
+ 
+
+
+ export default routes
